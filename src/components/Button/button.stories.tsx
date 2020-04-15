@@ -5,7 +5,7 @@ import Button from "./Button";
 storiesOf("Button", module)
     .add("Simple button", () => <Button backgroundColor="White" disabled={false}/>)
 
-    .add("Different Color", () => <Button backgroundColor="Red" disabled={false}/>)
+    .add("Different Color", () => <Button backgroundColor="Green" disabled={false}/>)
 
     .add("Disabled button", () => <Button backgroundColor="White" disabled={true}/>)
 
