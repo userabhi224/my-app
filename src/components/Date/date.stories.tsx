@@ -1,12 +1,45 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import DatePicker from "./Date";
+import React, {useState} from 'react'
+import { storiesOf } from '@storybook/react'
+import DatePick from './DatePick'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
-storiesOf("Date", module)
-    .add("SingleDatePicker", () => <DatePicker dateFormat="d-MM-yyyy" fromStartDate="04-04-2020" isTodate={false} isSingleDate={true} />)
+export interface State {
+    date:any
+    startDate:Date
+    onChange : () => void
+    handleChange: () => void
+  }
 
-    .add("SingleDatePickerwithTime", () => <DatePicker dateFormat="d-MM-yyyy hh:mm" fromStartDate="04-04-2020" isTodate={false} isSingleDate={true} />)
+storiesOf("DatePicker",module)
+    .add("SingleDatePicker", () => {
+        const [startDate , setStartDate] = useState(new Date())
+        const handleChange =(date : any)=>{
+            setStartDate(date);
+        }
+        return(<DatePick startDate={startDate} onChange={handleChange} flag={1} />)
+    })  
 
-    .add("RangeDatePicker", () => <DatePicker dateFormat="d-MM-yyyy" fromStartDate="04-04-2020" isTodate={true} />)
-    
-    .add("RangeDatePickerwithTime", () => <DatePicker dateFormat="d-MM-yyyy hh:mm" fromStartDate="04-04-2020"  isTodate={true} />)
+    .add("SingleDatePickerwithTime", () => {
+        const [startDate , setStartDate] = useState(new Date())
+        const handleChange =(date : any)=>{
+            setStartDate(date);
+        }
+        return(<DatePick startDate={startDate} onChange={handleChange} flag={2} showTimeSelect timeFormat="HH:mm" timeIntervals={1} timeCaption="Time" dateFormat="MMMM d, yyyy h:mm aa" />)
+    })
+
+    .add("RangeDatePicker", () => {
+        const [startDate, setStartDate] = useState(new Date("2020/02/08"))
+        const [endDate, setEndDate] = useState(new Date("2024/02/10"))
+        const handleChange =(date : any)=>{
+           setStartDate(date);
+        }
+        const handleChange1 =(date : any)=>{
+           setEndDate(date);
+        }
+        return (
+            <>
+            <DatePicker selected={startDate} onChange={handleChange} selectsStart startDate={startDate} endDate={endDate} />
+            <DatePicker selected={endDate} onChange={handleChange1} selectsEnd startDate={startDate} endDate={endDate} minDate={startDate} />
+            </>)
+    })
