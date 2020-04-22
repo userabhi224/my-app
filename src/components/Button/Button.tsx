@@ -3,10 +3,10 @@ import * as React from 'react'
 export interface ButtonIProps {
     backgroundColor: string,
     disabled:boolean,
-    onClick?: () => void
+    onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
 }
 
 export default (props: ButtonIProps) => {
     const {backgroundColor,disabled,onClick} = props;
-    return <button style={{backgroundColor}} disabled={disabled} onClick={() => alert('Clicked')}> Button</button>
+    return <button style={{backgroundColor}} disabled={disabled} onClick={onClick}> Button</button>
 }
